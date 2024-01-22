@@ -1,0 +1,128 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    LYNCSYNC
+{% endblock %}
+
+{% block main %}
+    <div class="section">
+        <h1>Add a Link</h1>
+    <!--Create a form for users to submit a link -->
+        <form method="POST" action="/" class="form-group">
+            <input name="link" placeholder="Link" type="text">
+            <select name="device">
+                <option disabled selected>Device</option>
+                <option value="Laptop">Laptop</option>
+                <option value="Smartphone">Smartphone</option>
+                <option value="Tablet">Tablet</option>
+                <option value="Desktop">Desktop</option>
+                <option value="Others">Others</option>
+            </select>
+            <select name="expiration_type" id="expiration_type">
+                <option disabled selected>Expiration Type</option>
+                <option value="permanent">Permanent</option>
+                <option value="temporary">Temporary</option>
+            </select>
+            <label for="expiration_time">Expiration Time:</label>
+            <input name="expiration_time" type="number" min="1" placeholder="Time" required disabled>
+            <select name="expiration-unit" disabled>
+                <option disabled selected>Unit of Time</option>
+                <option value="minutes">Minutes</option>
+                <option value="hours">Hours</option>
+                <option value="days">Days</option>
+            </select>
+
+            <script>
+                document.getElementById('expiration_type').addEventListener('change', function() {
+                    var timeInput = document.getElementsByName('expiration_time')[0];
+                    var unitSelect = document.getElementsByName('expiration-unit')[0];
+
+                    if (this.value === 'permanent') {
+                        timeInput.disabled = true;
+                        unitSelect.disabled = true;
+                    } else {
+                        timeInput.disabled = false;
+                        unitSelect.disabled = false;
+                    }
+                });
+            </script>
+
+            <input type="submit" value="Add Link">
+        </form>
+    </div>
+
+    <div class="section">
+        <h1>All Links</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Link</th>
+                    <th>Device</th>
+                    <th>Expiration Type</th>
+                    <th>Countdown Timer</th>
+                </tr>
+            </thead>
+            <tbody>
+            <!--Loop through the database entries to display them in this table -->
+                {% for link in links %}
+                    <tr>
+                        <td><a href="{{ link.links }}" target="_blank" style="color: white;">{{ link.links }}</a></td>
+                        <td>{{ link.devices }}</td>
+                        <td>{{ link.expiration_type }}</td>
+                        <td id="timer-{{ link.id }}"></td>
+                        <script>
+                    // Countdown timer script for each link
+                            function initializeTimer {
+                                {
+                                    link.id
+                                }
+                            }() {
+                                var expirationTime = {
+                                    {
+                                        link.expiration_time
+                                    }
+                                }; // Assuming expiration_time is in seconds
+                                var expirationType = "{{ link.expiration_type }}";
+                                var countdownElement = document.getElementById('timer-{{ link.id }}');
+                                var rowElement = countdownElement.closest('tr');
+
+                                function updateTimer() {
+                                    if (expirationType === "permanent") {
+                                        countdownElement.innerText = ''; // Display blank for permanent links
+                                    } else {
+                                        var minutes = Math.floor(expirationTime / 60);
+                                        var seconds = expirationTime % 60;
+                                        countdownElement.innerText = minutes + 'm ' + seconds + 's';
+
+                                        if (expirationTime <= 0) {
+                                            clearInterval(timerInterval);
+                                            countdownElement.innerText = 'Expired';
+                                            rowElement.remove();
+                                        }
+
+                                        expirationTime--;
+                                    }
+                                }
+
+                        // Initial call to set the timer
+                                updateTimer();
+
+                        // Update the timer every second for temporary links
+                                if (expirationType === "temporary") {
+                                    var timerInterval = setInterval(updateTimer, 1000);
+                                }
+                            }
+
+                    // Call the function to initialize the timer for each link
+                            initializeTimer {
+                                {
+                                    link.id
+                                }
+                            }();
+                        </script>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

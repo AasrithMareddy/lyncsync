@@ -1,0 +1,87 @@
+body {
+    background-color: #8281f8;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0;
+    text-align: left;
+}
+
+.custom-container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+    width: 90%;
+}
+
+.section {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+
+}
+
+.form-group {
+    margin-bottom: 20px;
+    background-color: ##8380f5;
+    padding: 20px;
+    border-radius: 8px;
+
+}
+
+
+
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+}
+
+form {
+    margin-top: 1rem;
+}
+
+input[type="text"],
+select {
+    line-height: 1;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+input[type="submit"],
+button {
+    background-color: #65a8da;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 0.375rem 0.75rem;
+    text-align: center;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    vertical-align: middle;
+}
+
+input[type="submit"]:hover,
+button:hover {
+    background-color: #c7e1ff;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+}
+
+table {
+    background-color: transparent;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+table th,
+table td {
+    padding: 0.75rem;
+    vertical-align: middle;
+}
+
+tbody tr:nth-of-type(odd) {
+    background-color: rgba(179, 208, 255, 0.3);
+}
