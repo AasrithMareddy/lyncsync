@@ -59,7 +59,7 @@ Challenge: Ensuring secure user authentication.
 Design Choice: User authentication is handled using Flask sessions, and the login_required decorator ensures that certain routes are only accessible to authenticated users.
 
 ## How to Launch Application
-1. Clone the repository: https://github.com/code50/124700787.git
+1. Clone the repository: [https://github.com/code50/124700787.git](https://github.com/AasrithMareddy/lyncsync.git)
 2. Change directory to project: cd project
 3. Ensure that flask is installed: pip install flask
 4. Run the application: flask run
